@@ -1,0 +1,31 @@
+{
+  "name": "@respond-io/config-manager-pkg",
+  "version": "1.1.0",
+  "description": "This package mainly handle all the secrets and non-secrets management for the sub projects in Main Respond.io repository. This Supports for AWS ECS services and Lambda functions.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/respond-io/config-manager-pkg.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/respond-io/config-manager-pkg/issues"
+  },
+  "homepage": "https://github.com/respond-io/config-manager-pkg#readme",
+  "dependencies": {
+    "@aws-sdk/client-ssm": "^3.418.0",
+    "@middy/core": "^4.6.4",
+    "@middy/ssm": "^4.6.4",
+    "@middy/util": "^4.6.4",
+    "js-yaml": "^4.1.0",
+    "lodash.get": "^4.4.2"
+  },
+  "publishConfig": {
+    "@respond-io:registry": "https://npm.pkg.github.com"
+  }
+}

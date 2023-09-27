@@ -1,0 +1,38 @@
+on:
+  push:
+    branches:
+      - master
+name: release-please
+jobs:
+  create_release:
+    runs-on: ubuntu-latest
+    outputs:
+      release_created: ${{ steps.release.outputs.release_created }}
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        id: release
+        with:
+          release-type: node
+  publish_release:
+    runs-on: ubuntu-latest
+    needs: create_release
+    if: ${{needs.create_release.outputs.release_created}}
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          registry-url: 'https://npm.pkg.github.com'
+      - run: npm ci --ignore-scripts
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGE_ACCESS_TOKEN }}
+      - run: npm audit --omit=dev
+      - run: npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: slack notification
+        run: |
+          curl -L \
+            -X POST \
+            ${{ secrets.SLACK_PACKAGE_RELEASE_WORKFLOW_URL }} \
+            -d "{\"package_name\":\"config-manager-pkg\"}"
