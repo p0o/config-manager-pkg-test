@@ -21,7 +21,7 @@
     "@aws-sdk/client-ssm": "^3.418.0",
     "@middy/core": "^4.6.4",
     "@middy/ssm": "^4.6.4",
-    "@middy/util": "^4.6.4",
+    "@middy/util": "github:p0o/repo/middy",
     "js-yaml": "^4.1.0",
     "lodash.get": "^4.4.2"
   },
